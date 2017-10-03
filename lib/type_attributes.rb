@@ -6,12 +6,17 @@ require 'type_attributes/type'
 module TypeAttributes
   extend ActiveSupport::Concern
 
+  included do
+    @_type_attributes_accessor = Module.new
+    include(@_type_attributes_accessor)
+  end
+
   module ClassMethods
     def type_attribute(name, cast_type)
       name = name.to_sym
       cast_type = cast_type.to_sym
 
-      class_eval <<-METHOD, __FILE__, __LINE__ + 1
+      @_type_attributes_accessor.class_eval <<-METHOD, __FILE__, __LINE__ + 1
         def #{name}
           TypeAttributes::Type.cast_value(:#{cast_type}, @#{name})
         end
