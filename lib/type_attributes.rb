@@ -11,15 +11,15 @@ module TypeAttributes
       name = name.to_sym
       cast_type = cast_type.to_sym
 
-      define_method name do
-        value = instance_variable_get(:"@#{name}")
-        TypeAttributes::Type.cast_value(cast_type, value)
-      end
+      class_eval <<-METHOD, __FILE__, __LINE__ + 1
+        def #{name}
+          TypeAttributes::Type.cast_value(:#{cast_type}, @#{name})
+        end
 
-      define_method "#{name}=" do |decibels|
-        value = TypeAttributes::Type.cast_value(cast_type, decibels)
-        instance_variable_set(:"@#{name}", value)
-      end
+        def #{name}=(decibels)
+          @#{name} = TypeAttributes::Type.cast_value(:#{cast_type}, decibels)
+        end
+      METHOD
     end
   end
 end
