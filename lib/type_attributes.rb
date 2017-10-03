@@ -7,8 +7,11 @@ module TypeAttributes
   extend ActiveSupport::Concern
 
   included do
-    @_type_attributes_accessor = Module.new
-    include(@_type_attributes_accessor)
+    @_generated_type_attribute_methods ||= begin
+      mod = const_set(:GeneratedTypeAttributeMethods, Module.new)
+      include mod
+      mod
+    end
   end
 
   module ClassMethods
@@ -16,7 +19,7 @@ module TypeAttributes
       name = name.to_sym
       cast_type = cast_type.to_sym
 
-      @_type_attributes_accessor.class_eval <<-METHOD, __FILE__, __LINE__ + 1
+      @_generated_type_attribute_methods.class_eval <<-METHOD, __FILE__, __LINE__ + 1
         def #{name}
           TypeAttributes::Type.cast_value(:#{cast_type}, @#{name})
         end
