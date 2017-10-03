@@ -1,3 +1,5 @@
+require 'active_model'
+
 module TypeAttributes
   module Type
     IS_RAILS_5 = defined?(ActiveModel) && ActiveModel.gem_version >= Gem::Version.new('5.0.0')

@@ -1,5 +1,4 @@
 require 'active_support/concern'
-require 'active_model'
 
 require 'type_attributes/version'
 require 'type_attributes/type'
