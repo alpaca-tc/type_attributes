@@ -2,15 +2,15 @@ module TypeAttributes
   module Type
     IS_RAILS_5 = defined?(ActiveModel) && ActiveModel.gem_version >= Gem::Version.new('5.0.0')
 
-    def self.flexible_type_name(type)
-      return type unless %i(date_time datetime).include?(type)
+    # Change type name for DateTime in Rails5
+    # related: https://github.com/rails/rails/pull/24079
+    DATETIME_TYPE = IS_RAILS_5 ? :datetime : :date_time
 
-      if IS_RAILS_5
-        # Change type name for DateTime in Rails5
-        # related: https://github.com/rails/rails/pull/24079
-        :datetime
+    def self.flexible_type_name(type)
+      if %i(date_time datetime).include?(type)
+        DATETIME_TYPE
       else
-        :date_time
+        type
       end
     end
 
