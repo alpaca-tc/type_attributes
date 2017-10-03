@@ -6,7 +6,7 @@ describe TypeAttributes do
   end
 
   let(:types) do
-    if described_class::IS_RAILS_5
+    if described_class::Type::IS_RAILS_5
       rails5_0_types
     else
       rails4_2_types
