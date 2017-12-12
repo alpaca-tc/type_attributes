@@ -31,6 +31,21 @@ user.id == 1 #=> true
 :time
 ```
 
+## Deprecation Warning
+
+Typed attribute is already supported in Rails5.2
+https://github.com/rails/rails/pull/30985
+
+You shouldn't use this gem, and replace it as following.
+
+```ruby
+# before
+type_attribute :key, :integer
+
+# after
+attribute :key, :integer
+```
+
 ## Installation
 
 Add this line to your application's Gemfile:
