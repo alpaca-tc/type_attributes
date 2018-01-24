@@ -1,6 +1,6 @@
 # TypeAttributes
 
-**Deprecated warning**
+**Deprecation warning**
 
 This gem no longer maintained.
 
