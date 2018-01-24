@@ -1,7 +1,18 @@
 # TypeAttributes
 
-TypeAttributes defines `.type_attribute` method to typecast value with `ActiveModel::Type.lookup(type).cast(value)`.
-Supported versions are `ActiveModel(> 5.0)` or `ActiveRecord(> 4.2)`.
+**Deprecated warning**
+
+This gem no longer maintained.
+
+In Rails5.2, Rails support `.attribute` method with `ActiveModel::Attributes`.
+Please remove this gem and replace `type_attribute(:name, :type)` with `attribute(:name, :type)`.
+
+In under Rails 5.2, please use [ActiveModelAttributes backport](https://github.com/alpaca-tc/active_model_attributes_backport) instead of.
+
+---
+
+TypeAttributes defines `.type_attribute` method to cast value with `ActiveModel::Type`.
+Supported versions are Rails `4.2`, `5.0` and `5.1`.
 
 ```
 class User
